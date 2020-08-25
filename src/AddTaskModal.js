@@ -1,32 +1,26 @@
 import React, {useState} from 'react';
 import './App.css';
 import {connect} from "react-redux";
-import AddTaskModal from "./AddTaskModal";
+import {Modal} from "reactstrap";
 
-function Board(props) {
-    console.log('--------tasks-----', props.deleteTask)
+function AddTaskModal(props) {
 
     const addButtonHandler = () => {
         props.addTask(newName)
         setNewName('')
     }
 
-    const listOfCards = props.tasks
     const [newName, setNewName] = useState('')
 
     return (
-        <div className="App">
-            {listOfCards.map(card =>
-                <li key={card.id}>
-                    {card.name}
-                    <button onClick={() => props.deleteTask(card.id)}>Delete</button>
-                </li>)}
+        <>
+            <Modal>
+                <button>Add New</button>
             <label htmlFor=''>New Card Name:</label>
             <input type='text' value={newName} onChange={(e) => setNewName(e.target.value)}/>
             <button onClick={addButtonHandler}>Add</button>
-          <AddTaskModal/>
-
-        </div>
+            </Modal>
+        </>
     );
 }
 
@@ -35,8 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteTask: (cardId) => dispatch({type: 'TASK_DELETE', payload: cardId}),                // dispatch отправь объект(action) в редюсер
     addTask: (newName) => dispatch({type: 'ADD_TASK', payload: newName})                  // dispatch отправь объект(action) в редюсер
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTaskModal);
