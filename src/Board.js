@@ -1,31 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {connect} from "react-redux";
 import AddTaskModal from "./AddTaskModal";
+import {Container, Button} from 'reactstrap'
 
 function Board(props) {
-    console.log('--------tasks-----', props.deleteTask)
-
-    const addButtonHandler = () => {
-        props.addTask(newName)
-        setNewName('')
-    }
 
     const listOfCards = props.tasks
-    const [newName, setNewName] = useState('')
+    const length = props.tasks
+    console.log('----------', length)
 
     return (
-        <div className="App">
-            {listOfCards.map(card =>
-                <li key={card.id}>
-                    {card.name}
-                    <button onClick={() => props.deleteTask(card.id)}>Delete</button>
-                </li>)}
-            <label htmlFor=''>New Card Name:</label>
-            <input type='text' value={newName} onChange={(e) => setNewName(e.target.value)}/>
-            <button onClick={addButtonHandler}>Add</button>
-          <AddTaskModal/>
+        <div>
+            <Container>
+                <AddTaskModal/>
 
+                {listOfCards.map((el, i) =>
+                    <li key={el.id}>
+                        {el.name}
+                        <Button onClick={() => props.deleteTask(el.id)}>Delete</Button>
+                        <Button onClick={() => props.moveUp(i)} disabled={i === 0}>⇧</Button>
+                        <Button onClick={() => props.moveDown(i)} disabled={i === props.tasks.length -1}>⇩</Button>
+                    </li>)}
+                <Button onClick={props.deleteAllTask}>Delete All</Button>
+            </Container>
         </div>
     );
 }
@@ -35,8 +33,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteTask: (cardId) => dispatch({type: 'TASK_DELETE', payload: cardId}),                // dispatch отправь объект(action) в редюсер
-    addTask: (newName) => dispatch({type: 'ADD_TASK', payload: newName})                  // dispatch отправь объект(action) в редюсер
+    deleteTask: (cardId) => dispatch({type: 'TASK_DELETE', payload: cardId}),   // dispatch отправь объект(action) в редюсер
+    deleteAllTask: () => dispatch({type: 'DELETE_ALL_TASKS'}),
+    moveUp: (index) => dispatch({type: 'MOVE_UP', payload: {index}}),
+    moveDown: (index) => dispatch({type: 'MOVE_DOWN', payload: {index}}),
+    // moveUp: (listIndexCurrent, listIndexPrevious) => dispatch({type: 'MOVE_UP', payload: {listIndexCurrent, listIndexPrevious}    })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

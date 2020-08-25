@@ -1,24 +1,34 @@
 import React, {useState} from 'react';
 import './App.css';
 import {connect} from "react-redux";
-import {Modal} from "reactstrap";
+import {Modal, Button, ModalHeader, ModalBody, ModalFooter, Label, Input} from "reactstrap";
 
 function AddTaskModal(props) {
 
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [newName, setNewName] = useState('')
+
     const addButtonHandler = () => {
         props.addTask(newName)
+        setIsModalOpen(false)
         setNewName('')
     }
 
-    const [newName, setNewName] = useState('')
 
     return (
         <>
-            <Modal>
-                <button>Add New</button>
-            <label htmlFor=''>New Card Name:</label>
-            <input type='text' value={newName} onChange={(e) => setNewName(e.target.value)}/>
-            <button onClick={addButtonHandler}>Add</button>
+            <Button onClick={() => setIsModalOpen(true)}>Add New</Button>
+            <Modal isOpen={isModalOpen}>
+                <ModalHeader> Add new Task </ModalHeader>
+                <ModalBody>
+                    <Label htmlFor=''>New Card Name:</Label>
+                    <Input type='text' value={newName} onChange={(e) => setNewName(e.target.value)}/>
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={addButtonHandler}>Add</Button>
+                    <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                </ModalFooter>
             </Modal>
         </>
     );
