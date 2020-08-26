@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/redux-kanban-new/static/css/main.5f361e03.chunk.css",
+    "main.js": "/redux-kanban-new/static/js/main.ea7042c0.chunk.js",
+    "main.js.map": "/redux-kanban-new/static/js/main.ea7042c0.chunk.js.map",
+    "runtime-main.js": "/redux-kanban-new/static/js/runtime-main.5a968ec2.js",
+    "runtime-main.js.map": "/redux-kanban-new/static/js/runtime-main.5a968ec2.js.map",
+    "static/css/2.11829350.chunk.css": "/redux-kanban-new/static/css/2.11829350.chunk.css",
+    "static/js/2.30ebbb9d.chunk.js": "/redux-kanban-new/static/js/2.30ebbb9d.chunk.js",
+    "static/js/2.30ebbb9d.chunk.js.map": "/redux-kanban-new/static/js/2.30ebbb9d.chunk.js.map",
+    "index.html": "/redux-kanban-new/index.html",
+    "precache-manifest.d28ab0544a4185af4f0164ae342d6c59.js": "/redux-kanban-new/precache-manifest.d28ab0544a4185af4f0164ae342d6c59.js",
+    "service-worker.js": "/redux-kanban-new/service-worker.js",
+    "static/css/2.11829350.chunk.css.map": "/redux-kanban-new/static/css/2.11829350.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/redux-kanban-new/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.30ebbb9d.chunk.js.LICENSE.txt": "/redux-kanban-new/static/js/2.30ebbb9d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a968ec2.js",
+    "static/css/2.11829350.chunk.css",
+    "static/js/2.30ebbb9d.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.ea7042c0.chunk.js"
+  ]
+}
