@@ -12,12 +12,26 @@ const initialState = {
             {id: 3, status: 'review', priority: 3, name: 'Text 3'},
             {id: 4, status: 'done', priority: 4, name: 'Text 4'}
         ],
+    editModalOpen: {isOpen: false, card: {}}
 };
 
 
 
 const kanbanControlPanel = (state = initialState, action) => {
     switch (action.type) {             //это как if else
+
+        case 'OPEN_EDIT_MODAL':
+            return {...state, editModalOpen: {isOpen: true, card: action.payload}}
+
+        case 'CLOSE_EDIT_MODAL':
+            return {...state, editModalOpen: {isOpen: false, card: {}}}
+
+        case 'EDIT_TASK':
+            console.log(action.payload)
+            return {...state, editModalOpen:{isOpen: false, card: {}}, list: state.list.map(el => {
+                if (el.id === action.payload.cardId) return {...el, name: action.payload.name}
+                  return el
+                })}
 
         case 'TASK_DELETE':              // этокак else и возвражает default
             return {...state, list: state.list.filter(el => el.id !== action.payload)}
@@ -38,7 +52,7 @@ const kanbanControlPanel = (state = initialState, action) => {
         case 'MOVE_UP':
             console.log(action.payload)
             let moveUp = [...state.list]
-        moveUp.splice(action.payload.index -1, 0, moveUp.splice(action.payload.index, 1)[0])
+        moveUp.splice(action.payload -1, 0, moveUp.splice(action.payload, 1)[0])
             return {
                 ...state,
                 list: moveUp
@@ -62,13 +76,36 @@ const kanbanControlPanel = (state = initialState, action) => {
                  // }
                  // -----------------------------------------
         case 'MOVE_DOWN':
-            console.log(action.payload)
+            console.log('MOVE_DOWN', action.payload)
             let moveDown = [...state.list]
-            moveDown.splice(action.payload.index +1, 0, moveDown.splice(action.payload.index, 1)[0])
+            moveDown.splice(action.payload +1, 0, moveDown.splice(action.payload, 1)[0])
             return {
                 ...state,
                 list: moveDown
             }
+        // case 'TASK_EDIT_SAVE':
+        //     let editedId = action.payload.editedId;
+        //     let initialEditName = action.payload.initialEditName;
+        //     console.log(editedId, initialEditName)
+        //     return {
+        //
+        //     }
+
+
+            // const taskEditSave = () => {
+            //     const newEditSave =
+            //         console.log("--------", editedId)
+            //     console.log("--------", initialEditName)
+            // }
+            // const onEditTask = (id, task) => {
+            //     const updatedTasks = tasks.map(el => {
+            //         if(el.id === id)
+            //             return {...el, name: task}
+            //         else return el;
+            //     })
+            //     setTasks(updatedTasks);
+            // };
+
         default:
 
             return state;
