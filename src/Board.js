@@ -16,7 +16,6 @@ function Board(props) {
                 <EditModalTask editModal={props.editModal}/>
                 {listOfCards.map((el, i) =>
                     <li key={el.id}>
-                        <input type='checkbox'/>
                         {el.name}
                         <Button onClick={() => props.deleteTask(el.id)}>Delete</Button>
                         <Button onClick={() => props.moveUp(i)} disabled={i === 0}>⇧</Button>
